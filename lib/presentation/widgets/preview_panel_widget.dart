@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../../core/constants/app_constants.dart';
 import '../../../../core/constants/supported_formats.dart';
+import '../../../../core/enums/app_category.dart';
 import '../../../features/converter/providers/selected_file_provider.dart';
 import '../../../features/converter/providers/conversion_state_provider.dart';
-import '../../../features/converter/image/image_converter.dart';
-import '../../../features/converter/media/media_converter.dart';
+import '../../../../core/services/converter_orchestrator.dart';
 import '../../../../core/utils/file_utils.dart';
 
 class PreviewPanelWidget extends ConsumerWidget {
@@ -94,7 +94,6 @@ class PreviewPanelWidget extends ConsumerWidget {
                   
                   const SizedBox(height: 32),
                   
-                  // Future: Format Selector Widget
                   Text(
                     'Target Format',
                     style: Theme.of(context).textTheme.titleMedium?.copyWith(
@@ -144,17 +143,14 @@ class PreviewPanelWidget extends ConsumerWidget {
                 onPressed: (selectedFile != null && targetFormat != null && !isConverting) ? () async {
                   ref.read(isConvertingProvider.notifier).state = true;
                   
-                  bool success = false;
-                  
-                  if (selectedFile.category == 'Image') {
-                     success = await ImageConverter.convertImage(selectedFile.filePath, targetFormat);
-                  } else if (selectedFile.category == 'Video' || selectedFile.category == 'Audio') {
-                     success = await MediaConverter.convertMedia(selectedFile.filePath, targetFormat);
-                  }
+                  bool success = await ConverterOrchestrator.convert(
+                    selectedFile.filePath,
+                    selectedFile.category!,
+                    targetFormat
+                  );
                   
                   ref.read(isConvertingProvider.notifier).state = false;
                   
-                  // Show Result Snackbar
                   if (context.mounted) {
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(
@@ -200,14 +196,18 @@ class PreviewPanelWidget extends ConsumerWidget {
     );
   }
 
-  IconData _getIconForCategory(String? category) {
+  IconData _getIconForCategory(AppCategory? category) {
     switch (category) {
-      case 'Image':
+      case AppCategory.images:
         return Icons.image;
-      case 'Video':
+      case AppCategory.videos:
         return Icons.movie;
-      case 'Audio':
+      case AppCategory.audio:
         return Icons.audiotrack;
+      case AppCategory.documents:
+        return Icons.description;
+      case AppCategory.dev:
+        return Icons.code;
       default:
         return Icons.insert_drive_file;
     }

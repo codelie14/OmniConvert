@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:mime/mime.dart';
 import '../constants/supported_formats.dart';
+import '../enums/app_category.dart';
 
 class FileDetectionService {
   static Future<FileDetectionResult> analyzeFile(String filePath) async {
@@ -16,7 +17,7 @@ class FileDetectionService {
     final int sizeBytes = await file.length();
     
     // Check if format is supported
-    final String? category = SupportedFormats.getCategoryForExtension(extension);
+    final AppCategory? category = SupportedFormats.getCategoryForExtension(extension);
     final bool isValid = category != null;
 
     return FileDetectionResult(
@@ -38,7 +39,7 @@ class FileDetectionResult {
   final String extension;
   final String mimeType;
   final int sizeBytes;
-  final String? category;
+  final AppCategory? category;
   final bool isValid;
   final String? errorMessage;
 
