@@ -19,17 +19,17 @@ OmniConvert est une application desktop **100% offline** qui permet de convertir
 
 ## 🎯 Objectifs v1.0.0
 
-| Objectif | Priorité |
-|---|---|
+| Objectif                                                         | Priorité    |
+| ---------------------------------------------------------------- | ----------- |
 | Conversion multi-format (image, audio, vidéo, doc, fichiers dev) | 🔴 Critique |
-| Drag & Drop universel avec détection automatique | 🔴 Critique |
-| Batch processing | 🔴 Critique |
-| UI Desktop premium (3 colonnes) | 🔴 Critique |
-| Historique des conversions | 🟠 Haute |
-| Profils/Presets de conversion | 🟠 Haute |
-| OCR offline (image → texte) | 🟡 Moyenne |
-| Système de plugins (architecture) | 🟡 Moyenne |
-| Monétisation (Free / Pro) | 🟡 Moyenne |
+| Drag & Drop universel avec détection automatique                 | 🔴 Critique |
+| Batch processing                                                 | 🔴 Critique |
+| UI Desktop premium (3 colonnes)                                  | 🔴 Critique |
+| Historique des conversions                                       | 🟠 Haute    |
+| Profils/Presets de conversion                                    | 🟠 Haute    |
+| OCR offline (image → texte)                                      | 🟡 Moyenne  |
+| Système de plugins (architecture)                                | 🟡 Moyenne  |
+| Monétisation (Free / Pro)                                        | 🟡 Moyenne  |
 
 ---
 
@@ -37,116 +37,117 @@ OmniConvert est une application desktop **100% offline** qui permet de convertir
 
 ### 📄 Documents
 
-| Source | Cible | Moteur | Notes |
-|---|---|---|---|
-| PDF | Word (.docx) | `pdf_to_docx` / `pandoc` | Préservation de mise en page |
-| Word (.docx) | PDF | `printing` / `pandoc` | Fidélité visuelle |
-| TXT | PDF | `pdf` package | Encodage UTF-8 |
-| PDF | TXT | `pdftext` | Extraction texte brut |
-| Markdown | HTML | `markdown` package | Support GFM |
-| HTML | Markdown | `html2md` | Nettoyage tags |
-| Markdown | PDF | `pandoc` | Rendu propre |
-| EPUB | PDF | `calibre` CLI | Support e-books |
+| Source       | Cible        | Moteur                   | Notes                        |
+| ------------ | ------------ | ------------------------ | ---------------------------- |
+| PDF          | Word (.docx) | `pdf_to_docx` / `pandoc` | Préservation de mise en page |
+| Word (.docx) | PDF          | `printing` / `pandoc`    | Fidélité visuelle            |
+| TXT          | PDF          | `pdf` package            | Encodage UTF-8               |
+| PDF          | TXT          | `pdftext`                | Extraction texte brut        |
+| Markdown     | HTML         | `markdown` package       | Support GFM                  |
+| HTML         | Markdown     | `html2md`                | Nettoyage tags               |
+| Markdown     | PDF          | `pandoc`                 | Rendu propre                 |
+| EPUB         | PDF          | `calibre` CLI            | Support e-books              |
 
 ---
 
 ### 🖼️ Images
 
-| Source | Cible | Options | Moteur |
-|---|---|---|---|
-| JPG | PNG / WebP / AVIF / BMP | Qualité, taille | `image` package |
-| PNG | JPG / WebP / ICO | Compression sans perte | `image` package |
-| WebP | JPG / PNG | — | `image` package |
-| SVG | PNG / JPG | Résolution DPI | `flutter_svg` |
-| HEIC | JPG / PNG | (iPhone photos) | `heic_to_jpg` |
-| GIF | WebP / MP4 | Animation conservée | `ffmpeg` |
-| Lot d'images | PDF | Assemblage multi-pages | `pdf` package |
-| Image | Texte | **OCR offline** | `tesseract` |
-| — | Redimensionnement | px / % / presets | `image` |
-| — | Compression intelligente | Qualité cible en KB/MB | `image` |
-| — | Conversion couleur | RGB, CMYK, Grayscale | `image` |
-| — | Filigrane (watermark) | Texte ou image | `image` |
+| Source       | Cible                    | Options                | Moteur          |
+| ------------ | ------------------------ | ---------------------- | --------------- |
+| JPG          | PNG / WebP / AVIF / BMP  | Qualité, taille        | `image` package |
+| PNG          | JPG / WebP / ICO         | Compression sans perte | `image` package |
+| WebP         | JPG / PNG                | —                      | `image` package |
+| SVG          | PNG / JPG                | Résolution DPI         | `flutter_svg`   |
+| HEIC         | JPG / PNG                | (iPhone photos)        | `heic_to_jpg`   |
+| GIF          | WebP / MP4               | Animation conservée    | `ffmpeg`        |
+| Lot d'images | PDF                      | Assemblage multi-pages | `pdf` package   |
+| Image        | Texte                    | **OCR offline**        | `tesseract`     |
+| —            | Redimensionnement        | px / % / presets       | `image`         |
+| —            | Compression intelligente | Qualité cible en KB/MB | `image`         |
+| —            | Conversion couleur       | RGB, CMYK, Grayscale   | `image`         |
+| —            | Filigrane (watermark)    | Texte ou image         | `image`         |
 
 ---
 
 ### 🎥 Vidéos
 
-| Source | Cible | Options | Moteur |
-|---|---|---|---|
-| MP4 | AVI / MKV / MOV / WebM | Codec, bitrate | `ffmpeg` |
-| AVI | MP4 / MKV | — | `ffmpeg` |
-| MKV | MP4 | — | `ffmpeg` |
-| Vidéo | Audio (extraction) | MP3 / AAC / WAV | `ffmpeg` |
-| Vidéo | GIF animé | Durée, fps, taille | `ffmpeg` |
-| — | Compression vidéo | Cible en MB / qualité CRF | `ffmpeg` |
-| — | Changement résolution | 4K→1080p, 720p, 480p | `ffmpeg` |
-| — | Changement FPS | 60fps → 30fps | `ffmpeg` |
-| — | Découpe (trim) | Début + Fin | `ffmpeg` |
-| — | Concaténation | Fusionner plusieurs vidéos | `ffmpeg` |
-| — | Ajout sous-titres (SRT) | Burn-in ou softsub | `ffmpeg` |
-| — | Capture miniature | Frame à t=X secondes | `ffmpeg` |
+| Source | Cible                   | Options                    | Moteur   |
+| ------ | ----------------------- | -------------------------- | -------- |
+| MP4    | AVI / MKV / MOV / WebM  | Codec, bitrate             | `ffmpeg` |
+| AVI    | MP4 / MKV               | —                          | `ffmpeg` |
+| MKV    | MP4                     | —                          | `ffmpeg` |
+| Vidéo  | Audio (extraction)      | MP3 / AAC / WAV            | `ffmpeg` |
+| Vidéo  | GIF animé               | Durée, fps, taille         | `ffmpeg` |
+| —      | Compression vidéo       | Cible en MB / qualité CRF  | `ffmpeg` |
+| —      | Changement résolution   | 4K→1080p, 720p, 480p       | `ffmpeg` |
+| —      | Changement FPS          | 60fps → 30fps              | `ffmpeg` |
+| —      | Découpe (trim)          | Début + Fin                | `ffmpeg` |
+| —      | Concaténation           | Fusionner plusieurs vidéos | `ffmpeg` |
+| —      | Ajout sous-titres (SRT) | Burn-in ou softsub         | `ffmpeg` |
+| —      | Capture miniature       | Frame à t=X secondes       | `ffmpeg` |
 
 ---
 
 ### 🎵 Audio
 
-| Source | Cible | Options | Moteur |
-|---|---|---|---|
-| MP3 | WAV / AAC / OGG / FLAC | Bitrate, samplerate | `ffmpeg` |
-| WAV | MP3 / AAC | Compression | `ffmpeg` |
-| FLAC | MP3 | Lossy compression | `ffmpeg` |
-| — | Normalisation volume | Loudness LUFS cible | `ffmpeg` |
-| — | Découpe audio | Début + Fin | `ffmpeg` |
-| — | Fusion audio | Mixage de pistes | `ffmpeg` |
-| — | Extraction canal | Stéréo → Mono | `ffmpeg` |
-| — | Changement vitesse | 0.5x → 2x | `ffmpeg` |
-| — | Réduction bruit | Filtre passebas | `ffmpeg` |
+| Source | Cible                  | Options             | Moteur   |
+| ------ | ---------------------- | ------------------- | -------- |
+| MP3    | WAV / AAC / OGG / FLAC | Bitrate, samplerate | `ffmpeg` |
+| WAV    | MP3 / AAC              | Compression         | `ffmpeg` |
+| FLAC   | MP3                    | Lossy compression   | `ffmpeg` |
+| —      | Normalisation volume   | Loudness LUFS cible | `ffmpeg` |
+| —      | Découpe audio          | Début + Fin         | `ffmpeg` |
+| —      | Fusion audio           | Mixage de pistes    | `ffmpeg` |
+| —      | Extraction canal       | Stéréo → Mono       | `ffmpeg` |
+| —      | Changement vitesse     | 0.5x → 2x           | `ffmpeg` |
+| —      | Réduction bruit        | Filtre passebas     | `ffmpeg` |
 
 ---
 
 ### 📦 Fichiers Dev / Data
 
-| Source | Cible | Notes |
-|---|---|---|
-| JSON | YAML | Indentation configurable |
-| YAML | JSON | Strict ou permissif |
-| CSV | JSON | Clés = headers |
-| JSON | CSV | Aplatissement objets imbriqués |
-| XML | JSON | Attributs conservés |
-| JSON | XML | Schéma configurable |
-| `.env` | JSON | Export variables |
-| SQL dump | CSV | Extraction tables |
-| Base64 | Fichier binaire | Decode |
-| Fichier binaire | Base64 | Encode |
-| Texte | Hash | MD5, SHA1, SHA256 |
-| Fichier | Archive ZIP / TAR | Compression |
-| Archive | Fichiers | Décompression |
+| Source          | Cible             | Notes                          |
+| --------------- | ----------------- | ------------------------------ |
+| JSON            | YAML              | Indentation configurable       |
+| YAML            | JSON              | Strict ou permissif            |
+| CSV             | JSON              | Clés = headers                 |
+| JSON            | CSV               | Aplatissement objets imbriqués |
+| XML             | JSON              | Attributs conservés            |
+| JSON            | XML               | Schéma configurable            |
+| `.env`          | JSON              | Export variables               |
+| SQL dump        | CSV               | Extraction tables              |
+| Base64          | Fichier binaire   | Decode                         |
+| Fichier binaire | Base64            | Encode                         |
+| Texte           | Hash              | MD5, SHA1, SHA256              |
+| Fichier         | Archive ZIP / TAR | Compression                    |
+| Archive         | Fichiers          | Décompression                  |
 
 ---
 
 ### 🔢 Conversions Classiques (Calculateur)
 
-| Catégorie | Unités |
-|---|---|
-| **Longueur** | km, m, cm, mm, mile, yard, foot, inch |
-| **Poids** | kg, g, lb, oz, tonne |
-| **Surface** | m², cm², km², hectare, acre, ft² |
-| **Volume** | L, mL, m³, gallon, pint, cup |
-| **Température** | °C, °F, K |
-| **Vitesse** | km/h, m/s, mph, knot |
-| **Pression** | Pa, bar, atm, psi |
-| **Énergie** | J, kJ, kcal, Wh, kWh |
-| **Données** | bit, byte, KB, MB, GB, TB, PB |
-| **Temps** | ns, μs, ms, s, min, h, j, semaine |
-| **Monnaie** | Taux offline (mis à jour périodiquement via fichier JSON) |
-| **Angles** | Degré, radian, gradian |
-| **Numériques** | Binaire, Octal, Décimal, Hexadécimal |
+| Catégorie       | Unités                                                    |
+| --------------- | --------------------------------------------------------- |
+| **Longueur**    | km, m, cm, mm, mile, yard, foot, inch                     |
+| **Poids**       | kg, g, lb, oz, tonne                                      |
+| **Surface**     | m², cm², km², hectare, acre, ft²                          |
+| **Volume**      | L, mL, m³, gallon, pint, cup                              |
+| **Température** | °C, °F, K                                                 |
+| **Vitesse**     | km/h, m/s, mph, knot                                      |
+| **Pression**    | Pa, bar, atm, psi                                         |
+| **Énergie**     | J, kJ, kcal, Wh, kWh                                      |
+| **Données**     | bit, byte, KB, MB, GB, TB, PB                             |
+| **Temps**       | ns, μs, ms, s, min, h, j, semaine                         |
+| **Monnaie**     | Taux offline (mis à jour périodiquement via fichier JSON) |
+| **Angles**      | Degré, radian, gradian                                    |
+| **Numériques**  | Binaire, Octal, Décimal, Hexadécimal                      |
 
 ---
 
 ## 💥 2. FONCTIONNALITÉS DIFFÉRENCIANTES
 
 ### ⚡ Drag & Drop Universel
+
 - Glisser n'importe quel fichier → détection automatique du type
 - Proposition des conversions disponibles
 - Support multi-fichiers simultané
@@ -155,6 +156,7 @@ OmniConvert est une application desktop **100% offline** qui permet de convertir
 ---
 
 ### 🤖 Détection Intelligente
+
 - Analyse MIME type + extension + contenu
 - Score de confiance affiché
 - Suggestions de conversion classées par pertinence
@@ -163,6 +165,7 @@ OmniConvert est une application desktop **100% offline** qui permet de convertir
 ---
 
 ### 📦 Batch Processing
+
 - File d'attente de conversion (queue)
 - Progression individuelle et globale
 - Pause / Reprise / Annulation
@@ -172,6 +175,7 @@ OmniConvert est une application desktop **100% offline** qui permet de convertir
 ---
 
 ### 📜 Historique des Conversions
+
 - Liste persistante (stockage local SQLite)
 - Filtrage par date, type, format source/cible
 - Relancer une conversion en 1 clic
@@ -181,19 +185,21 @@ OmniConvert est une application desktop **100% offline** qui permet de convertir
 ---
 
 ### 🎛️ Profils de Conversion (Presets)
+
 Presets intégrés :
 
-| Nom | Description |
-|---|---|
-| 📱 WhatsApp | Image <1MB, JPEG 85% |
-| 📸 Instagram | 1080px, WebP optimisé |
-| ▶️ YouTube | MP4 H.264, 1080p, AAC |
-| 📧 Email | Image <500KB, PDF <2MB |
-| 🌐 Web Optimisé | WebP, max 1920px |
-| 💾 Archivage | Qualité max, sans compression |
-| 📟 Dev JSON | JSON minifié |
+| Nom             | Description                   |
+| --------------- | ----------------------------- |
+| 📱 WhatsApp     | Image <1MB, JPEG 85%          |
+| 📸 Instagram    | 1080px, WebP optimisé         |
+| ▶️ YouTube      | MP4 H.264, 1080p, AAC         |
+| 📧 Email        | Image <500KB, PDF <2MB        |
+| 🌐 Web Optimisé | WebP, max 1920px              |
+| 💾 Archivage    | Qualité max, sans compression |
+| 📟 Dev JSON     | JSON minifié                  |
 
 Presets personnalisés :
+
 - Créer, nommer, sauvegarder ses propres profils
 - Import/Export de presets (fichier `.omcp`)
 - Partage de presets entre utilisateurs
@@ -201,6 +207,7 @@ Presets personnalisés :
 ---
 
 ### 🔍 Prévisualisation en Temps Réel
+
 - Aperçu avant/après côte à côte (images)
 - Lecteur audio/vidéo intégré
 - Différence de taille affichée en %
@@ -209,14 +216,16 @@ Presets personnalisés :
 ---
 
 ### 🔒 Sécurité & Confidentialité
+
 - 100% offline — aucune donnée envoyée en ligne
 - Option de suppression automatique des fichiers temporaires
-- Chiffrement des fichiers de sortie (AES-256) — *Pro*
-- Filigrane automatique — *Pro*
+- Chiffrement des fichiers de sortie (AES-256) — _Pro_
+- Filigrane automatique — _Pro_
 
 ---
 
 ### 🌙 Thèmes & Apparence
+
 - Mode sombre / clair / système
 - Thèmes de couleur personnalisables (accent color)
 - Densité d'affichage (compact / normal / confortable)
@@ -224,29 +233,32 @@ Presets personnalisés :
 ---
 
 ### 🌐 Internationalisation (i18n)
+
 - 🇫🇷 Français
 - 🇬🇧 Anglais
 - 🇪🇸 Espagnol
 - 🇩🇪 Allemand
 - 🇵🇹 Portugais
-*(extensible via fichiers ARB)*
+  _(extensible via fichiers ARB)_
 
 ---
 
 ### ⌨️ Raccourcis Clavier
-| Action | Raccourci |
-|---|---|
-| Nouvelle conversion | `Ctrl+N` |
-| Ouvrir fichier | `Ctrl+O` |
-| Lancer conversion | `Ctrl+Enter` |
-| Batch processing | `Ctrl+B` |
-| Historique | `Ctrl+H` |
-| Paramètres | `Ctrl+,` |
-| Quitter | `Ctrl+Q` |
+
+| Action              | Raccourci    |
+| ------------------- | ------------ |
+| Nouvelle conversion | `Ctrl+N`     |
+| Ouvrir fichier      | `Ctrl+O`     |
+| Lancer conversion   | `Ctrl+Enter` |
+| Batch processing    | `Ctrl+B`     |
+| Historique          | `Ctrl+H`     |
+| Paramètres          | `Ctrl+,`     |
+| Quitter             | `Ctrl+Q`     |
 
 ---
 
 ### 🔔 Notifications Desktop
+
 - Notification système à la fin d'une conversion
 - Son de confirmation configurable
 - Badge sur l'icône (tâches en cours)
@@ -282,17 +294,17 @@ Presets personnalisés :
 
 ### Composants UI principaux
 
-| Composant | Description |
-|---|---|
-| `DropZone` | Zone de glisser-déposer avec animation |
-| `FormatSelector` | Sélecteur source/cible avec icônes |
-| `OptionsPanel` | Paramètres dynamiques selon le type |
-| `ProgressCard` | Carte de progression par fichier |
-| `BatchQueue` | File d'attente visuelle |
-| `PreviewPanel` | Aperçu avant/après |
-| `HistoryList` | Liste des conversions passées |
-| `PresetGrid` | Grille des profils disponibles |
-| `StatsWidget` | Statistiques d'utilisation |
+| Composant        | Description                            |
+| ---------------- | -------------------------------------- |
+| `DropZone`       | Zone de glisser-déposer avec animation |
+| `FormatSelector` | Sélecteur source/cible avec icônes     |
+| `OptionsPanel`   | Paramètres dynamiques selon le type    |
+| `ProgressCard`   | Carte de progression par fichier       |
+| `BatchQueue`     | File d'attente visuelle                |
+| `PreviewPanel`   | Aperçu avant/après                     |
+| `HistoryList`    | Liste des conversions passées          |
+| `PresetGrid`     | Grille des profils disponibles         |
+| `StatsWidget`    | Statistiques d'utilisation             |
 
 ---
 
@@ -300,15 +312,15 @@ Presets personnalisés :
 
 ### Core
 
-| Technologie | Usage |
-|---|---|
-| **Flutter 3.x** | Framework UI Desktop |
-| **Dart** | Logique applicative |
-| **FFmpeg** | Vidéo, Audio, GIF |
-| **Pandoc** | Documents (MD, DOCX, PDF) |
-| **Tesseract** | OCR offline |
-| **SQLite** | Historique local (`sqflite`) |
-| **Hive** | Paramètres & Presets |
+| Technologie     | Usage                        |
+| --------------- | ---------------------------- |
+| **Flutter 3.x** | Framework UI Desktop         |
+| **Dart**        | Logique applicative          |
+| **FFmpeg**      | Vidéo, Audio, GIF            |
+| **Pandoc**      | Documents (MD, DOCX, PDF)    |
+| **Tesseract**   | OCR offline                  |
+| **SQLite**      | Historique local (`sqflite`) |
+| **Hive**        | Paramètres & Presets         |
 
 ### Packages Flutter clés
 
@@ -317,35 +329,35 @@ dependencies:
   # UI
   flutter_dropzone: ^3.0.0
   window_manager: ^0.3.0
-  fluent_ui: ^4.0.0          # ou material3
-  
+  fluent_ui: ^4.0.0 # ou material3
+
   # Fichiers
   file_picker: ^6.0.0
   path_provider: ^2.1.0
-  
+
   # Images
   image: ^4.0.0
   flutter_svg: ^2.0.0
-  
+
   # Audio/Vidéo
   ffmpeg_kit_flutter: ^6.0.0
-  
+
   # Documents
   pdf: ^3.10.0
   printing: ^5.11.0
-  
+
   # Dev / Data
   yaml: ^3.1.0
   csv: ^5.1.0
-  
+
   # Stockage local
   sqflite: ^2.3.0
   hive_flutter: ^1.1.0
-  
+
   # i18n
   flutter_localizations:
   intl: ^0.18.0
-  
+
   # Utilitaires
   crypto: ^3.0.0
   archive: ^3.4.0
@@ -458,12 +470,14 @@ abstract class ConversionPlugin {
 ## 💰 7. MONÉTISATION
 
 ### Plan Free
+
 - Conversions simples (1 fichier à la fois)
 - 5 formats par catégorie
 - Historique 7 jours
 - Filigrane OmniConvert sur PDF générés
 
 ### Plan Pro (abonnement mensuel ou licence perpétuelle)
+
 - ✅ Batch processing illimité
 - ✅ Tous les formats
 - ✅ Presets personnalisés illimités
@@ -476,6 +490,7 @@ abstract class ConversionPlugin {
 - ✅ Mises à jour en avance
 
 ### Plan Teams (multi-licences)
+
 - Jusqu'à 10 postes
 - Tableau de bord admin
 - Presets partagés en équipe
@@ -486,6 +501,7 @@ abstract class ConversionPlugin {
 ## 📊 8. MÉTRIQUES & ANALYTICS (Offline)
 
 Données collectées **localement uniquement** :
+
 - Nombre de conversions par catégorie
 - Formats les plus utilisés
 - Temps moyen de conversion
@@ -499,31 +515,30 @@ Affichées dans un **Dashboard Statistiques** intégré.
 ## 🗺️ 9. ROADMAP
 
 ### v1.0.0 — MVP (actuel)
+
 - [ ] Conversion image (JPG, PNG, WebP)
 - [ ] Conversion audio (MP3, WAV, AAC)
 - [ ] Conversion vidéo (MP4, AVI, MKV)
 - [ ] Drag & Drop basique
 - [ ] UI 3 colonnes
-
-### v1.1.0
 - [ ] Batch processing
 - [ ] Historique SQLite
 - [ ] Presets intégrés
 - [ ] Conversion documents (PDF ↔ Word)
-
-### v1.2.0
 - [ ] OCR offline (Tesseract)
 - [ ] Conversions Dev (JSON, YAML, CSV)
 - [ ] Calculateur d'unités complet
 - [ ] Thèmes clair/sombre
 
 ### v1.3.0
+
 - [ ] Internationalisation (FR, EN, ES)
 - [ ] Notifications desktop
 - [ ] Raccourcis clavier complets
 - [ ] Presets personnalisés
 
 ### v2.0.0
+
 - [ ] Système de plugins
 - [ ] Marketplace IndraLabs
 - [ ] Plan Teams
@@ -569,5 +584,5 @@ IndraLabs Apps
 
 ---
 
-*© 2026 IndraLabs — OmniConvert v1.0.0*
-*Tous droits réservés — Licence propriétaire (Free + Pro)*
+_© 2026 IndraLabs — OmniConvert v1.0.0_
+_Tous droits réservés — Licence propriétaire (Free + Pro)_
