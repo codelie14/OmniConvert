@@ -7,6 +7,8 @@ import '../providers/navigation_provider.dart';
 import '../widgets/sidebar_widget.dart';
 import '../widgets/main_area_widget.dart';
 import '../widgets/preview_panel_widget.dart';
+import 'history_page.dart';
+import 'settings_page.dart';
 
 class HomePage extends ConsumerWidget {
   const HomePage({super.key});
@@ -22,10 +24,10 @@ class HomePage extends ConsumerWidget {
           Container(
             height: 32,
             color: AppConstants.backgroundPrimary,
-            child: const Row(
+            child: Row(
               children: [
-                Expanded(child: DragToMoveArea(child: SizedBox.expand())),
-                WindowCaption(
+                const Expanded(child: DragToMoveArea(child: SizedBox.expand())),
+                const WindowCaption(
                   brightness: Brightness.dark,
                   backgroundColor: Colors.transparent,
                 ),
@@ -53,14 +55,17 @@ class HomePage extends ConsumerWidget {
   Widget _buildContentArea(AppCategory category) {
     switch (category) {
       case AppCategory.home:
+      case AppCategory.documents:
       case AppCategory.images:
       case AppCategory.videos:
       case AppCategory.audio:
+      case AppCategory.dev:
+      case AppCategory.units:
         return const MainAreaWidget();
       case AppCategory.history:
-        return const Center(child: Text('Historique (Prochainement)', style: TextStyle(color: Colors.white)));
+        return const HistoryPage();
       case AppCategory.settings:
-        return const Center(child: Text('Paramètres (Prochainement)', style: TextStyle(color: Colors.white)));
+        return const SettingsPage();
     }
   }
 }
