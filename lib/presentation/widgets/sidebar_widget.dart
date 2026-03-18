@@ -36,9 +36,12 @@ class SidebarWidget extends ConsumerWidget {
           ),
           const SizedBox(height: 40),
           _buildNavItem(context, ref, Icons.home_rounded, 'Accueil', AppCategory.home, selectedNav == AppCategory.home),
+          _buildNavItem(context, ref, Icons.description_rounded, 'Documents', AppCategory.documents, selectedNav == AppCategory.documents),
           _buildNavItem(context, ref, Icons.image_rounded, 'Images', AppCategory.images, selectedNav == AppCategory.images),
           _buildNavItem(context, ref, Icons.videocam_rounded, 'Vidéos', AppCategory.videos, selectedNav == AppCategory.videos),
           _buildNavItem(context, ref, Icons.audiotrack_rounded, 'Audio', AppCategory.audio, selectedNav == AppCategory.audio),
+          _buildNavItem(context, ref, Icons.code_rounded, 'Dev', AppCategory.dev, selectedNav == AppCategory.dev),
+          _buildNavItem(context, ref, Icons.calculate_rounded, 'Unités', AppCategory.units, selectedNav == AppCategory.units),
           const Spacer(),
           _buildNavItem(context, ref, Icons.history_rounded, 'Historique', AppCategory.history, selectedNav == AppCategory.history),
           _buildNavItem(context, ref, Icons.settings_rounded, 'Paramètres', AppCategory.settings, selectedNav == AppCategory.settings),
@@ -52,9 +55,9 @@ class SidebarWidget extends ConsumerWidget {
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 4.0),
       decoration: BoxDecoration(
-        color: isSelected ? AppConstants.primaryBlue.withValues(alpha: 0.15) : Colors.transparent,
+        color: isSelected ? AppConstants.primaryBlue.withOpacity(0.15) : Colors.transparent,
         borderRadius: BorderRadius.circular(12),
-        border: isSelected ? Border.all(color: AppConstants.primaryBlue.withValues(alpha: 0.5), width: 1) : null,
+        border: isSelected ? Border.all(color: AppConstants.primaryBlue.withOpacity(0.5), width: 1) : null,
       ),
       child: ListTile(
         leading: Icon(
