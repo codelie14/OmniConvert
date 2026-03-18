@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../../core/constants/app_constants.dart';
+import '../../../../core/utils/system_utils.dart';
 import 'package:desktop_drop/desktop_drop.dart';
 import 'package:file_picker/file_picker.dart';
 import '../../../features/converter/providers/selected_file_provider.dart';
@@ -14,6 +15,32 @@ class MainAreaWidget extends ConsumerStatefulWidget {
 
 class _MainAreaWidgetState extends ConsumerState<MainAreaWidget> {
   bool _isDragging = false;
+  bool _isFfmpegAvailable = true;
+
+  @override
+  void initState() {
+    super.initState();
+    _checkFfmpeg();
+  }
+
+  Future<void> _checkFfmpeg() async {
+    final available = await SystemUtils.isFfmpegAvailable();
+    if (mounted) {
+      setState(() {
+        _isFfmpegAvailable = available;
+      });
+    }
+  }
+
+  void _showErrorSnackBar(String message) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(message),
+        backgroundColor: Colors.redAccent,
+        behavior: SnackBarBehavior.floating,
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -23,16 +50,40 @@ class _MainAreaWidgetState extends ConsumerState<MainAreaWidget> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          Text(
-            'Convert Files',
-            style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                  color: AppConstants.textMain,
-                  fontWeight: FontWeight.bold,
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                'Convert Files',
+                style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                      color: AppConstants.textMain,
+                      fontWeight: FontWeight.bold,
+                    ),
+              ),
+              if (!_isFfmpegAvailable)
+                Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                  decoration: BoxDecoration(
+                    color: Colors.amber.withValues(alpha: 0.2),
+                    borderRadius: BorderRadius.circular(8),
+                    border: Border.all(color: Colors.amber.withValues(alpha: 0.5)),
+                  ),
+                  child: const Row(
+                    children: [
+                      Icon(Icons.warning_amber_rounded, color: Colors.amber, size: 16),
+                      SizedBox(width: 8),
+                      Text(
+                        'FFmpeg non détecté',
+                        style: TextStyle(color: Colors.amber, fontSize: 12, fontWeight: FontWeight.bold),
+                      ),
+                    ],
+                  ),
                 ),
+            ],
           ),
           const SizedBox(height: 8),
           Text(
-            'Drag and drop your images, audio, or video files here.',
+            'Glissez-déposez vos fichiers images, audio ou vidéo ici.',
             style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                   color: AppConstants.textSecondary,
                 ),
@@ -57,9 +108,10 @@ class _MainAreaWidgetState extends ConsumerState<MainAreaWidget> {
                 
                 final files = details.files;
                 if (files.isNotEmpty) {
-                  // Wait for the provider to process the first file for MVP
-                  await ref.read(selectedFileProvider.notifier).setFile(files.first.path);
-                  debugPrint('Dropped ${files.length} files. Selected: ${files.first.path}');
+                  final success = await ref.read(selectedFileProvider.notifier).setFile(files.first.path);
+                  if (!success && mounted) {
+                    _showErrorSnackBar('Format de fichier non supporté ou invalide.');
+                  }
                 }
               },
               child: AnimatedContainer(
@@ -84,7 +136,7 @@ class _MainAreaWidgetState extends ConsumerState<MainAreaWidget> {
                       ),
                       const SizedBox(height: 24),
                       Text(
-                        'Drop files here',
+                        'Déposez vos fichiers ici',
                         style: Theme.of(context).textTheme.titleLarge?.copyWith(
                               color: _isDragging ? AppConstants.primaryBlue : AppConstants.textSecondary,
                               fontWeight: FontWeight.bold,
@@ -92,24 +144,27 @@ class _MainAreaWidgetState extends ConsumerState<MainAreaWidget> {
                       ),
                       const SizedBox(height: 12),
                       Text(
-                        'or',
+                        'ou',
                         style: TextStyle(color: AppConstants.textSecondary.withValues(alpha: 0.7)),
                       ),
                       const SizedBox(height: 12),
                       ElevatedButton.icon(
                         onPressed: () async {
                            FilePickerResult? result = await FilePicker.platform.pickFiles(
-                             allowMultiple: false, // Keep it simple for MVP selected file
+                             allowMultiple: false,
                            );
                            if (result != null && result.files.isNotEmpty) {
                               final path = result.files.first.path;
                               if (path != null) {
-                                await ref.read(selectedFileProvider.notifier).setFile(path);
+                                final success = await ref.read(selectedFileProvider.notifier).setFile(path);
+                                if (!success && mounted) {
+                                  _showErrorSnackBar('Format de fichier non supporté ou invalide.');
+                                }
                               }
                            }
                         },
                         icon: const Icon(Icons.folder_open),
-                        label: const Text('Browse Files'),
+                        label: const Text('Parcourir les fichiers'),
                         style: ElevatedButton.styleFrom(
                           backgroundColor: AppConstants.primaryBlue,
                           foregroundColor: AppConstants.textMain,

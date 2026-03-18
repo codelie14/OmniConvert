@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../../core/constants/app_constants.dart';
+import '../../../../core/enums/app_category.dart';
+import '../providers/navigation_provider.dart';
 
-class SidebarWidget extends StatelessWidget {
+class SidebarWidget extends ConsumerWidget {
   const SidebarWidget({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final selectedNav = ref.watch(navigationProvider);
+
     return Container(
       width: AppConstants.sidebarWidth,
       color: AppConstants.backgroundPrimary,
@@ -30,20 +35,20 @@ class SidebarWidget extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 40),
-          _buildNavItem(context, Icons.home_rounded, 'Accueil', true),
-          _buildNavItem(context, Icons.image_rounded, 'Images', false),
-          _buildNavItem(context, Icons.videocam_rounded, 'Vidéos', false),
-          _buildNavItem(context, Icons.audiotrack_rounded, 'Audio', false),
+          _buildNavItem(context, ref, Icons.home_rounded, 'Accueil', AppCategory.home, selectedNav == AppCategory.home),
+          _buildNavItem(context, ref, Icons.image_rounded, 'Images', AppCategory.images, selectedNav == AppCategory.images),
+          _buildNavItem(context, ref, Icons.videocam_rounded, 'Vidéos', AppCategory.videos, selectedNav == AppCategory.videos),
+          _buildNavItem(context, ref, Icons.audiotrack_rounded, 'Audio', AppCategory.audio, selectedNav == AppCategory.audio),
           const Spacer(),
-          _buildNavItem(context, Icons.history_rounded, 'Historique', false),
-          _buildNavItem(context, Icons.settings_rounded, 'Paramètres', false),
+          _buildNavItem(context, ref, Icons.history_rounded, 'Historique', AppCategory.history, selectedNav == AppCategory.history),
+          _buildNavItem(context, ref, Icons.settings_rounded, 'Paramètres', AppCategory.settings, selectedNav == AppCategory.settings),
           const SizedBox(height: 20),
         ],
       ),
     );
   }
 
-  Widget _buildNavItem(BuildContext context, IconData icon, String title, bool isSelected) {
+  Widget _buildNavItem(BuildContext context, WidgetRef ref, IconData icon, String title, AppCategory category, bool isSelected) {
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 4.0),
       decoration: BoxDecoration(
@@ -64,7 +69,7 @@ class SidebarWidget extends StatelessWidget {
           ),
         ),
         onTap: () {
-          // TODO: Implement navigation logic via Riverpod
+          ref.read(navigationProvider.notifier).state = category;
         },
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(12),
