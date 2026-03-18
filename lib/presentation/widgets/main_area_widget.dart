@@ -64,15 +64,15 @@ class _MainAreaWidgetState extends ConsumerState<MainAreaWidget> {
                 Container(
                   padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                   decoration: BoxDecoration(
-                    color: Colors.amber.withValues(alpha: 0.2),
+                    color: Colors.amber.withOpacity(0.2),
                     borderRadius: BorderRadius.circular(8),
-                    border: Border.all(color: Colors.amber.withValues(alpha: 0.5)),
+                    border: Border.all(color: Colors.amber.withOpacity(0.5)),
                   ),
-                  child: const Row(
+                  child: Row(
                     children: [
-                      Icon(Icons.warning_amber_rounded, color: Colors.amber, size: 16),
-                      SizedBox(width: 8),
-                      Text(
+                      const Icon(Icons.warning_amber_rounded, color: Colors.amber, size: 16),
+                      const SizedBox(width: 8),
+                      const Text(
                         'FFmpeg non détecté',
                         style: TextStyle(color: Colors.amber, fontSize: 12, fontWeight: FontWeight.bold),
                       ),
@@ -117,10 +117,10 @@ class _MainAreaWidgetState extends ConsumerState<MainAreaWidget> {
               child: AnimatedContainer(
                 duration: const Duration(milliseconds: 200),
                 decoration: BoxDecoration(
-                  color: _isDragging ? AppConstants.primaryBlue.withValues(alpha: 0.1) : AppConstants.backgroundPrimary,
+                  color: _isDragging ? AppConstants.primaryBlue.withOpacity(0.1) : AppConstants.backgroundPrimary,
                   borderRadius: BorderRadius.circular(24),
                   border: Border.all(
-                    color: _isDragging ? AppConstants.primaryBlue : AppConstants.surfaceDark.withValues(alpha: 0.5),
+                    color: _isDragging ? AppConstants.primaryBlue : AppConstants.surfaceDark.withOpacity(0.5),
                     width: 2,
                     style: BorderStyle.solid,
                   ),
@@ -132,7 +132,7 @@ class _MainAreaWidgetState extends ConsumerState<MainAreaWidget> {
                       Icon(
                         Icons.cloud_upload_rounded,
                         size: 80,
-                        color: _isDragging ? AppConstants.primaryBlue : AppConstants.textSecondary.withValues(alpha: 0.5),
+                        color: _isDragging ? AppConstants.primaryBlue : AppConstants.textSecondary.withOpacity(0.5),
                       ),
                       const SizedBox(height: 24),
                       Text(
@@ -145,7 +145,7 @@ class _MainAreaWidgetState extends ConsumerState<MainAreaWidget> {
                       const SizedBox(height: 12),
                       Text(
                         'ou',
-                        style: TextStyle(color: AppConstants.textSecondary.withValues(alpha: 0.7)),
+                        style: TextStyle(color: AppConstants.textSecondary.withOpacity(0.7)),
                       ),
                       const SizedBox(height: 12),
                       ElevatedButton.icon(

@@ -39,14 +39,14 @@ class PreviewPanelWidget extends ConsumerWidget {
                   Icon(
                     Icons.settings_suggest_rounded,
                     size: 64,
-                    color: AppConstants.textSecondary.withValues(alpha: 0.3),
+                    color: AppConstants.textSecondary.withOpacity(0.3),
                   ),
                   const SizedBox(height: 16),
                   Text(
                     'Select a file to configure conversion options',
                     textAlign: TextAlign.center,
                     style: TextStyle(
-                      color: AppConstants.textSecondary.withValues(alpha: 0.5),
+                      color: AppConstants.textSecondary.withOpacity(0.5),
                     ),
                   ),
                 ],
@@ -165,7 +165,7 @@ class PreviewPanelWidget extends ConsumerWidget {
                 style: ElevatedButton.styleFrom(
                   backgroundColor: AppConstants.primaryCyan,
                   disabledBackgroundColor: AppConstants.surfaceDark,
-                  disabledForegroundColor: AppConstants.textSecondary.withValues(alpha: 0.5),
+                  disabledForegroundColor: AppConstants.textSecondary.withOpacity(0.5),
                   padding: const EdgeInsets.symmetric(vertical: 20),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(12),
