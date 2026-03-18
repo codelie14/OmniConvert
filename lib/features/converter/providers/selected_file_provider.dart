@@ -8,13 +8,14 @@ final selectedFileProvider = StateNotifierProvider<SelectedFileNotifier, FileDet
 class SelectedFileNotifier extends StateNotifier<FileDetectionResult?> {
   SelectedFileNotifier() : super(null);
 
-  Future<void> setFile(String filePath) async {
+  Future<bool> setFile(String filePath) async {
     final result = await FileDetectionService.analyzeFile(filePath);
     if (result.isValid) {
       state = result;
+      return true;
     } else {
-      // TODO: Handle invalid file error (e.g. show snackbar)
       state = null;
+      return false;
     }
   }
 
